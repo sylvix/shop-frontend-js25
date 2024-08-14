@@ -1,10 +1,10 @@
-import ProductForm from './components/ProductForm.tsx';
+import ProductForm from './components/ProductForm';
 import { Typography } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../app/hooks.ts';
-import { createProduct } from './productsThunks.ts';
-import { ProductMutation } from '../../types.ts';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { ProductMutation } from '@/types';
 import { useNavigate } from 'react-router-dom';
-import { selectProductCreating } from './productsSlice.ts';
+import { selectProductCreating } from './productsSlice';
+import { createProduct } from './productsThunks';
 
 const NewProduct = () => {
   const navigate = useNavigate();
@@ -18,7 +18,9 @@ const NewProduct = () => {
 
   return (
     <>
-      <Typography variant="h4" sx={{mb: 2}}>New product</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>
+        New product
+      </Typography>
       <ProductForm onSubmit={onFormSubmit} isLoading={isCreating} />
     </>
   );

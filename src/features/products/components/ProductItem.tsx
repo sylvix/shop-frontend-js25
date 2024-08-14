@@ -1,27 +1,40 @@
 import React from 'react';
-import { Card, CardActions, CardContent, CardHeader, Grid, IconButton } from '@mui/material';
+import { Card, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, styled } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import imageNotFound from '@/assets/images/image-not-found.png';
+import { API_URL } from '@/constants';
+
+const ImageCardMedia = styled(CardMedia)({
+  height: 0,
+  paddingTop: '56.25%',
+});
 
 interface Props {
+  id: string;
   title: string;
   price: number;
-  id: string;
+  image: string | null;
 }
 
-const ProductItem: React.FC<Props> = ({title, price, id}) => {
+const ProductItem: React.FC<Props> = ({ id, title, price, image }) => {
+  let cardImage = imageNotFound;
+
+  if (image) {
+    cardImage = `${API_URL}/${image}`;
+  }
+
   return (
-    <Grid item sx={{width: '300px'}}>
-      <Card>
-        <CardHeader title={title}/>
+    <Grid item sx={{ width: '300px' }}>
+      <Card sx={{ height: '100%' }}>
+        <CardHeader title={title} />
+        <ImageCardMedia image={cardImage} title={title} />
         <CardContent>
-          <strong>
-            Price: {price} KGS
-          </strong>
+          <strong>Price: {price} KGS</strong>
         </CardContent>
         <CardActions>
           <IconButton component={Link} to={`/products/${id}`}>
-            <ArrowForwardIcon/>
+            <ArrowForwardIcon />
           </IconButton>
         </CardActions>
       </Card>

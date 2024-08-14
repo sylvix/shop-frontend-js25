@@ -1,10 +1,10 @@
 import { Button, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../app/hooks.ts';
-import { selectProducts } from './productsSlice.ts';
-import ProductItem from './components/ProductItem.tsx';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { selectProducts } from './productsSlice';
+import ProductItem from './components/ProductItem';
 import { useEffect } from 'react';
-import { fetchProducts } from './productsThunks.ts';
+import { fetchProducts } from './productsThunks';
 
 const Products = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +33,7 @@ const Products = () => {
             id={product.id}
             title={product.title}
             price={product.price}
+            image={product.image}
           />
         ))}
       </Grid>

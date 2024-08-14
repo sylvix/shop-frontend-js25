@@ -6,14 +6,14 @@ const StyledLink = styled(Link)({
   textDecoration: 'none',
   '&:hover': {
     color: 'inherit',
-  }
+  },
 });
 
 const AppToolbar = () => {
   return (
-    <AppBar position="sticky" sx={{mb: 2}}>
+    <AppBar position="sticky" sx={{ mb: 2 }}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <StyledLink to="/">CompStore</StyledLink>
         </Typography>
       </Toolbar>
