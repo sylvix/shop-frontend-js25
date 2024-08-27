@@ -13,6 +13,10 @@ export const createProduct = createAsyncThunk<void, ProductMutation>('products/c
   formData.append('description', productMutation.description);
   formData.append('price', productMutation.price);
 
+  if (productMutation.category_id) {
+    formData.append('category_id', productMutation.category_id.toString());
+  }
+
   if (productMutation.image) {
     formData.append('image', productMutation.image);
   }
