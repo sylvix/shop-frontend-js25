@@ -19,7 +19,7 @@ const ProductForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
   const categoriesFetching = useAppSelector(selectCategoriesFetching);
 
   const [state, setState] = useState<ProductMutation>({
-    category_id: null,
+    category: '',
     title: '',
     description: '',
     price: '',
@@ -63,16 +63,16 @@ const ProductForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
             required
             select
             label="Category"
-            id="category_id"
-            name="category_id"
-            value={state.category_id || ''}
+            id="category"
+            name="category"
+            value={state.category}
             onChange={inputChangeHandler}
           >
             <MenuItem value="" disabled>
               Select category
             </MenuItem>
             {categories.map((category) => (
-              <MenuItem key={category.id} value={category.id}>
+              <MenuItem key={category._id} value={category._id}>
                 {category.title}
               </MenuItem>
             ))}

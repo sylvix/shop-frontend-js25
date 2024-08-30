@@ -12,8 +12,12 @@ const NewProduct = () => {
   const isCreating = useAppSelector(selectProductCreating);
 
   const onFormSubmit = async (productMutation: ProductMutation) => {
-    await dispatch(createProduct(productMutation));
-    navigate('/');
+    try {
+      await dispatch(createProduct(productMutation));
+      navigate('/');
+    } catch (error) {
+      // handle error
+    }
   };
 
   return (

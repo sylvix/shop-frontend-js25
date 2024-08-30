@@ -1,23 +1,25 @@
+export interface Category {
+  _id: string;
+  title: string;
+  description: string | null;
+}
+
 export interface Product {
-  id: number;
-  category_id: number;
+  _id: string;
+  category: {
+    _id: string;
+    title: string;
+  };
   title: string;
   description: string;
   price: number;
   image: string | null;
-  created_at: string;
 }
 
 export interface ProductMutation {
-  category_id: number | null;
+  category: string;
   title: string;
   description: string;
   price: string;
   image: File | null;
-}
-
-export interface Category {
-  id: number;
-  title: string;
-  description: string | null;
 }

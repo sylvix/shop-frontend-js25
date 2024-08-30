@@ -9,17 +9,14 @@ export const fetchProducts = createAsyncThunk<Product[]>('products/fetchAll', as
 
 export const createProduct = createAsyncThunk<void, ProductMutation>('products/create', async (productMutation) => {
   const formData = new FormData();
-  formData.append('title', productMutation.title);
-  formData.append('description', productMutation.description);
-  formData.append('price', productMutation.price);
 
-  if (productMutation.category_id) {
-    formData.append('category_id', productMutation.category_id.toString());
-  }
-
-  if (productMutation.image) {
-    formData.append('image', productMutation.image);
-  }
+  const keys = Object.keys(productMutation) as (keyof ProductMutation)[];
+  keys.forEach((key) => {
+    const value = productMutation[key];
+    if (value !== null) {
+      formData.append(key, value);
+    }
+  });
 
   await axiosApi.post('/products', formData);
 });
