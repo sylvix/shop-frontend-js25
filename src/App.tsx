@@ -14,6 +14,7 @@ const App = () => {
       <Container maxWidth="xl" component="main">
         <Routes>
           <Route path="/" element={<Products />} />
+          <Route path="/categories/:categoryId" element={<Products />} />
           <Route path="/products/new" element={<NewProduct />} />
           <Route path="/products/:id" element={<OneProduct />} />
           <Route path="*" element={<Typography variant="h1">Not found</Typography>} />

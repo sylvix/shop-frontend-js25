@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { selectOneProduct, selectOneProductFetching } from './productsSlice';
 import { fetchOneProduct } from './productsThunks';
-import { CircularProgress, Grid, Typography } from '@mui/material';
+import { Button, CircularProgress, Grid, Typography } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const OneProduct = () => {
   const { id } = useParams() as { id: string };
@@ -17,6 +18,11 @@ const OneProduct = () => {
 
   return (
     <Grid container direction="column" spacing={2}>
+      <Grid item>
+        <Button variant="text" startIcon={<ArrowBackIcon />} component={Link} to="/">
+          Back to products
+        </Button>
+      </Grid>
       {isFetching && (
         <Grid item>
           <CircularProgress />
