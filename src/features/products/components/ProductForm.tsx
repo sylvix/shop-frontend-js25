@@ -7,6 +7,7 @@ import { ProductMutation } from '@/types';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { fetchCategories } from '@/features/categories/categoriesThunks';
 import { selectCategories, selectCategoriesFetching } from '@/features/categories/categoriesSlice';
+import { Editor } from '@tinymce/tinymce-react';
 
 interface Props {
   onSubmit: (product: ProductMutation) => void;
@@ -53,6 +54,13 @@ const ProductForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
     }));
   };
 
+  const editorChangeHandler = (value: string) => {
+    setState((prevState) => ({
+      ...prevState,
+      description: value,
+    }));
+  };
+
   return (
     <Grid container direction="column" spacing={2} component="form" onSubmit={submitFormHandler}>
       <Grid item>
@@ -83,15 +91,50 @@ const ProductForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
         <TextField required label="Title" id="title" name="title" value={state.title} onChange={inputChangeHandler} />
       </Grid>
       <Grid item>
-        <TextField
-          required
-          multiline
-          minRows={3}
-          label="Description"
-          id="description"
-          name="description"
+        {/*<TextField*/}
+        {/*  required*/}
+        {/*  multiline*/}
+        {/*  minRows={3}*/}
+        {/*  label="Description"*/}
+        {/*  id="description"*/}
+        {/*  name="description"*/}
+        {/*  value={state.description}*/}
+        {/*  onChange={inputChangeHandler}*/}
+        {/*/>*/}
+        <Editor
+          licenseKey="gpl"
+          tinymceScriptSrc="/tinymce/tinymce.min.js"
+          init={{
+            height: 300,
+            menubar: false,
+            plugins: [
+              'advlist',
+              'autolink',
+              'lists',
+              'link',
+              'image',
+              'charmap',
+              'anchor',
+              'searchreplace',
+              'visualblocks',
+              'code',
+              'fullscreen',
+              'insertdatetime',
+              'media',
+              'table',
+              'preview',
+              'help',
+              'wordcount',
+            ],
+            toolbar:
+              'undo redo | blocks | ' +
+              'bold italic forecolor | alignleft aligncenter ' +
+              'alignright alignjustify | bullist numlist outdent indent | ' +
+              'removeformat | help',
+            content_style: 'body { font-family:Roboto,Arial,sans-serif; font-size:14px }',
+          }}
           value={state.description}
-          onChange={inputChangeHandler}
+          onEditorChange={editorChangeHandler}
         />
       </Grid>
       <Grid item>

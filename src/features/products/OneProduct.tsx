@@ -36,9 +36,7 @@ const OneProduct = () => {
           <Grid item component={Typography} variant="h6">
             {product.price} KGS
           </Grid>
-          <Grid item component={Typography} variant="body1">
-            {product.description}
-          </Grid>
+          <Grid item component={Typography} variant="body1" dangerouslySetInnerHTML={{ __html: product.description }} />
         </>
       )}
     </Grid>
