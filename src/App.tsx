@@ -5,6 +5,7 @@ import Products from './features/products/Products';
 import NewProduct from './features/products/NewProduct';
 import OneProduct from './features/products/OneProduct';
 import Register from '@/features/users/Register';
+import Login from '@/features/users/Login';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/products/new" element={<NewProduct />} />
           <Route path="/products/:id" element={<OneProduct />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<Typography variant="h1">Not found</Typography>} />
         </Routes>
       </Container>
