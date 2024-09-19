@@ -27,6 +27,7 @@ export interface ProductMutation {
 export interface RegisterMutation {
   username: string;
   password: string;
+  confirmPassword: string;
 }
 
 export interface LoginMutation {

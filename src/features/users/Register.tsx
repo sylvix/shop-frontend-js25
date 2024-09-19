@@ -15,6 +15,7 @@ const Register = () => {
   const [state, setState] = useState<RegisterMutation>({
     username: '',
     password: '',
+    confirmPassword: '',
   });
 
   const getFieldError = (fieldName: string) => {
@@ -79,6 +80,19 @@ const Register = () => {
               onChange={inputChangeHandler}
               error={Boolean(getFieldError('password'))}
               helperText={getFieldError('password')}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              required
+              type="password"
+              label="Confirm Password"
+              name="confirmPassword"
+              autoComplete="new-password"
+              value={state.confirmPassword}
+              onChange={inputChangeHandler}
+              error={Boolean(getFieldError('confirmPassword'))}
+              helperText={getFieldError('confirmPassword')}
             />
           </Grid>
         </Grid>
