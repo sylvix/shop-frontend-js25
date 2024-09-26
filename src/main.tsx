@@ -6,6 +6,9 @@ import App from '@/App';
 import { persistor, store } from '@/app/store';
 import theme from '@/theme';
 import { PersistGate } from 'redux-persist/integration/react';
+import { addInterceptors } from '@/axiosApi';
+
+addInterceptors(store);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
