@@ -91,16 +91,6 @@ const ProductForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
         <TextField required label="Title" id="title" name="title" value={state.title} onChange={inputChangeHandler} />
       </Grid>
       <Grid item>
-        {/*<TextField*/}
-        {/*  required*/}
-        {/*  multiline*/}
-        {/*  minRows={3}*/}
-        {/*  label="Description"*/}
-        {/*  id="description"*/}
-        {/*  name="description"*/}
-        {/*  value={state.description}*/}
-        {/*  onChange={inputChangeHandler}*/}
-        {/*/>*/}
         <Editor
           licenseKey="gpl"
           tinymceScriptSrc="/tinymce/tinymce.min.js"
