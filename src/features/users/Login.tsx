@@ -5,7 +5,8 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { selectLoginError } from '@/features/users/usersSlice';
-import { login } from '@/features/users/usersThunks';
+import { googleLogin, login } from '@/features/users/usersThunks';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,6 +35,13 @@ const Login = () => {
     navigate('/');
   };
 
+  const googleLoginHandler = async (credentialResponse: CredentialResponse) => {
+    if (credentialResponse.credential) {
+      await dispatch(googleLogin(credentialResponse.credential)).unwrap();
+      navigate('/');
+    }
+  };
+
   return (
     <Container component="div" maxWidth="xs">
       <Box
@@ -55,6 +63,14 @@ const Login = () => {
             {error.error}
           </Alert>
         )}
+        <Box sx={{ pt: 2 }}>
+          <GoogleLogin
+            onSuccess={googleLoginHandler}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
+        </Box>
         <Box component="form" onSubmit={submitFormHandler} sx={{ mt: 3, width: '100%' }}>
           <Grid container direction="column" spacing={2}>
             <Grid item>
