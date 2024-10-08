@@ -1,5 +1,5 @@
-import { Alert, Button, CircularProgress, Grid, Typography } from '@mui/material';
-import { Link, useParams } from 'react-router-dom';
+import { Alert, CircularProgress, Grid, Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { selectProducts, selectProductsFetching } from './productsSlice';
 import ProductItem from './components/ProductItem';
@@ -8,14 +8,12 @@ import { fetchProducts } from './productsThunks';
 import CategoriesMenu from '@/features/categories/components/CategoriesMenu';
 import { selectCategories } from '@/features/categories/categoriesSlice';
 import { fetchCategories } from '@/features/categories/categoriesThunks';
-import { selectUser } from '@/features/users/usersSlice';
 
 const Products = () => {
   const dispatch = useAppDispatch();
   const products = useAppSelector(selectProducts);
   const categories = useAppSelector(selectCategories);
   const isFetching = useAppSelector(selectProductsFetching);
-  const user = useAppSelector(selectUser);
   const { categoryId } = useParams();
 
   useEffect(() => {
@@ -65,13 +63,6 @@ const Products = () => {
           <Grid item>
             <Typography variant="h4">{pageTitle}</Typography>
           </Grid>
-          {user && user.role === 'admin' && (
-            <Grid item>
-              <Button color="primary" component={Link} to="/products/new">
-                Add product
-              </Button>
-            </Grid>
-          )}
         </Grid>
         <Grid item container spacing={1}>
           {isFetching && <CircularProgress />}

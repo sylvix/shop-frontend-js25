@@ -3,6 +3,7 @@ import { User } from '@/types';
 import { Button, Grid, Menu, MenuItem } from '@mui/material';
 import { useAppDispatch } from '@/app/hooks';
 import { logout } from '@/features/users/usersThunks';
+import { Link } from 'react-router-dom';
 
 interface Props {
   user: User;
@@ -31,6 +32,11 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         Hello, {user.displayName ? user.displayName : user.username}!
       </Button>
       <Menu open={isOpen} anchorEl={anchorEl} onClose={handleClose} keepMounted>
+        {user.role === 'admin' && (
+          <MenuItem component={Link} to="/admin" onClick={handleClose}>
+            Admin
+          </MenuItem>
+        )}
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </Grid>

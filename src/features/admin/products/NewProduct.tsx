@@ -1,19 +1,19 @@
-import ProductForm from './components/ProductForm';
+import ProductForm from './ProductForm';
 import { Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { ProductMutation } from '@/types';
 import { useNavigate } from 'react-router-dom';
-import { selectProductCreating } from './productsSlice';
-import { createProduct } from './productsThunks';
+import { selectAdminProductCreating } from '@/features/admin/products/adminProductsSlice';
+import { createAdminProduct } from '@/features/admin/products/adminProductsThunks';
 
 const NewProduct = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isCreating = useAppSelector(selectProductCreating);
+  const isCreating = useAppSelector(selectAdminProductCreating);
 
   const onFormSubmit = async (productMutation: ProductMutation) => {
     try {
-      await dispatch(createProduct(productMutation));
+      await dispatch(createAdminProduct(productMutation));
       navigate('/');
     } catch (error) {
       // handle error

@@ -1,20 +1,18 @@
 import { Product } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
-import { createProduct, fetchOneProduct, fetchProducts } from './productsThunks';
+import { fetchOneProduct, fetchProducts } from './productsThunks';
 
 export interface ProductsState {
   items: Product[];
   product: Product | null;
   itemsFetching: boolean;
   oneFetching: boolean;
-  isCreating: boolean;
 }
 
 const initialState: ProductsState = {
   items: [],
   product: null,
   itemsFetching: false,
-  isCreating: false,
   oneFetching: false,
 };
 
@@ -36,17 +34,6 @@ export const productsSlice = createSlice({
       });
 
     builder
-      .addCase(createProduct.pending, (state) => {
-        state.isCreating = true;
-      })
-      .addCase(createProduct.fulfilled, (state) => {
-        state.isCreating = false;
-      })
-      .addCase(createProduct.rejected, (state) => {
-        state.isCreating = false;
-      });
-
-    builder
       .addCase(fetchOneProduct.pending, (state) => {
         state.product = null;
         state.oneFetching = true;
@@ -62,7 +49,6 @@ export const productsSlice = createSlice({
   selectors: {
     selectProducts: (state) => state.items,
     selectProductsFetching: (state) => state.itemsFetching,
-    selectProductCreating: (state) => state.isCreating,
     selectOneProduct: (state) => state.product,
     selectOneProductFetching: (state) => state.oneFetching,
   },
@@ -70,10 +56,5 @@ export const productsSlice = createSlice({
 
 export const productsReducer = productsSlice.reducer;
 
-export const {
-  selectProducts,
-  selectProductsFetching,
-  selectProductCreating,
-  selectOneProduct,
-  selectOneProductFetching,
-} = productsSlice.selectors;
+export const { selectProducts, selectProductsFetching, selectOneProduct, selectOneProductFetching } =
+  productsSlice.selectors;

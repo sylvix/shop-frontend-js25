@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import Error403 from '@/UI/Errors/Error403';
 
 interface Props extends React.PropsWithChildren {
   isAllowed: boolean | null;
@@ -7,7 +7,7 @@ interface Props extends React.PropsWithChildren {
 
 const ProtectedRoute: React.FC<Props> = ({ isAllowed, children }) => {
   if (!isAllowed) {
-    return <Navigate to="/login" />;
+    return <Error403 />;
   }
 
   return children;
